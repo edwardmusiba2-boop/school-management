@@ -927,7 +927,8 @@ button {
   .navbar-inner,
   .page-header,
   .hero-panel,
-  .dashboard-grid {
+  .dashboard-grid,
+  .report-grid {
     grid-template-columns: 1fr;
     display: grid;
   }
@@ -939,6 +940,28 @@ button {
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+
+  .login-visual {
+    padding: 1rem 1rem 0;
+  }
+
+  .login-slide {
+    min-height: 320px;
+  }
+
+  .login-panel {
+    padding: 1rem 1rem 1.5rem;
+  }
+
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 640px) {
@@ -949,10 +972,17 @@ button {
 
   .navbar-inner {
     padding: 0.8rem 0;
+    flex-direction: column;
   }
 
   .nav-links {
     justify-content: flex-start;
+    width: 100%;
+  }
+
+  .nav-links a {
+    flex: 1 1 calc(50% - 0.5rem);
+    text-align: center;
   }
 
   .stats-grid,
@@ -963,8 +993,27 @@ button {
   .hero-panel,
   .panel,
   .entry-form,
-  .record-item {
+  .record-item,
+  .login-box,
+  .login-slide {
     border-radius: 18px;
+  }
+
+  .hero-copy h1 {
+    font-size: 2.1rem;
+  }
+
+  .slide-overlay {
+    padding: 1.25rem;
+  }
+
+  .login-box {
+    padding: 1.25rem;
+  }
+
+  .login-options {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .record-item {
