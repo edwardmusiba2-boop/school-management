@@ -11,15 +11,19 @@ import Attendance from "./pages/Attendance";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/students" element={<Students />} />
-        <Route path="/teachers" element={<Teachers />} />
-        <Route path="/classes" element={<Classes />} />
-        <Route path="/grades" element={<Grades />} />
-        <Route path="/attendance" element={<Attendance />} />
-      </Routes>
+      <div className="app-shell">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/students" element={<Students />} />
+            <Route path="/teachers" element={<Teachers />} />
+            <Route path="/classes" element={<Classes />} />
+            <Route path="/grades" element={<Grades />} />
+            <Route path="/attendance" element={<Attendance />} />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
   );
 }
