@@ -2,7 +2,7 @@
 import { NavLink } from "react-router-dom";
 
 const navItems = [
-  { to: "/", label: "Dashboard" },
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/students", label: "Students" },
   { to: "/teachers", label: "Teachers" },
   { to: "/classes", label: "Classes" },
@@ -28,7 +28,7 @@ function Navbar() {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.to === "/"}
+              end={item.to === "/dashboard"}
               className={({ isActive }) => (isActive ? "active" : "")}
             >
               {item.label}

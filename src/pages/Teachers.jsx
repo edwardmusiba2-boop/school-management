@@ -1,5 +1,6 @@
 // src/pages/Teachers.jsx
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../firebase";
 import {
   collection,
@@ -9,6 +10,7 @@ import {
 } from "firebase/firestore";
 
 function Teachers() {
+  const navigate = useNavigate();
   const [teachers, setTeachers] = useState([]);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -77,7 +79,12 @@ function Teachers() {
       <div className="record-panel">
         <ul className="record-list">
           {teachers.map((teacher) => (
-            <li key={teacher.id} className="record-item">
+            <li
+              key={teacher.id}
+              className="record-item"
+              onClick={() => navigate(`/teachers/${teacher.id}`)}
+              style={{ cursor: "pointer" }}
+            >
               <div>
                 <strong>{teacher.fullName}</strong>
                 <span>{teacher.email}</span>

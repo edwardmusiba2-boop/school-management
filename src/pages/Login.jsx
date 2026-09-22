@@ -38,6 +38,19 @@ function Login() {
 
   function handleLogin(event) {
     event.preventDefault();
+
+    const normalizedIdentifier = identifier.trim().toLowerCase();
+
+    if (normalizedIdentifier.includes("student")) {
+      navigate("/student-portal");
+      return;
+    }
+
+    if (normalizedIdentifier.includes("teacher")) {
+      navigate("/teacher-portal");
+      return;
+    }
+
     navigate("/dashboard");
   }
 
@@ -107,8 +120,9 @@ function Login() {
 
           <div className="demo-box">
             <span>Demo credentials</span>
-            <p>admin@schoolflow.com</p>
-            <p>password123</p>
+            <p>student@schoolflow.com → Student portal</p>
+            <p>teacher@schoolflow.com → Teacher portal</p>
+            <p>admin@schoolflow.com → Admin dashboard</p>
           </div>
         </div>
       </div>
