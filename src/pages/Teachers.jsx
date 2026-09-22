@@ -43,41 +43,50 @@ function Teachers() {
   }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Teachers</h1>
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <p className="section-tag">Staff</p>
+          <h1>Teachers</h1>
+        </div>
+        <span className="page-badge">Faculty board</span>
+      </header>
 
-      <form onSubmit={handleAddTeacher} style={{ marginBottom: "1.5rem" }}>
+      <form className="entry-form" onSubmit={handleAddTeacher}>
         <input
           type="text"
           placeholder="Full name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <input
           type="text"
           placeholder="Phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <button type="submit">Add Teacher</button>
       </form>
 
-      <ul>
-        {teachers.map((teacher) => (
-          <li key={teacher.id}>
-            {teacher.fullName} — {teacher.email} — {teacher.phone}
-          </li>
-        ))}
-      </ul>
+      <div className="record-panel">
+        <ul className="record-list">
+          {teachers.map((teacher) => (
+            <li key={teacher.id} className="record-item">
+              <div>
+                <strong>{teacher.fullName}</strong>
+                <span>{teacher.email}</span>
+              </div>
+              <span className="status-tag active">{teacher.phone || "No phone"}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

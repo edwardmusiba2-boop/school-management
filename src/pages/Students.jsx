@@ -13,7 +13,6 @@ function Students() {
   const [fullName, setFullName] = useState("");
   const [admissionNumber, setAdmissionNumber] = useState("");
 
-  // Listen to the students collection in real time
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "students"), (snapshot) => {
       const studentList = snapshot.docs.map((doc) => ({
@@ -23,7 +22,6 @@ function Students() {
       setStudents(studentList);
     });
 
-    // Clean up the listener when the component unmounts
     return () => unsubscribe();
   }, []);
 
@@ -42,34 +40,44 @@ function Students() {
   }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Students</h1>
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <p className="section-tag">Records</p>
+          <h1>Students</h1>
+        </div>
+        <span className="page-badge">Live roster</span>
+      </header>
 
-      <form onSubmit={handleAddStudent} style={{ marginBottom: "1.5rem" }}>
+      <form className="entry-form" onSubmit={handleAddStudent}>
         <input
           type="text"
           placeholder="Full name"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <input
           type="text"
           placeholder="Admission number"
           value={admissionNumber}
           onChange={(e) => setAdmissionNumber(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <button type="submit">Add Student</button>
       </form>
 
-      <ul>
-        {students.map((student) => (
-          <li key={student.id}>
-            {student.fullName} — {student.admissionNumber}
-          </li>
-        ))}
-      </ul>
+      <div className="record-panel">
+        <ul className="record-list">
+          {students.map((student) => (
+            <li key={student.id} className="record-item">
+              <div>
+                <strong>{student.fullName}</strong>
+                <span>Admission: {student.admissionNumber}</span>
+              </div>
+              <span className="status-tag active">Active</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

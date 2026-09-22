@@ -7,6 +7,7 @@ import Teachers from "./pages/Teachers";
 import Classes from "./pages/Classes";
 import Grades from "./pages/Grades";
 import Attendance from "./pages/Attendance";
+import Reports from "./pages/Reports";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/classes" element={<Classes />} />
             <Route path="/grades" element={<Grades />} />
             <Route path="/attendance" element={<Attendance />} />
+            <Route path="/reports" element={<Reports />} />
           </Routes>
         </main>
       </div>

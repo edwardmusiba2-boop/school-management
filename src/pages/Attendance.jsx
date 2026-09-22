@@ -40,6 +40,7 @@ function Attendance() {
       recordedAt: serverTimestamp(),
     });
 
+    setStudentId("");
     setDate("");
     setStatus("present");
   }
@@ -50,31 +51,24 @@ function Attendance() {
   }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Attendance</h1>
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <p className="section-tag">Operations</p>
+          <h1>Attendance</h1>
+        </div>
+        <span className="page-badge">Daily check-in</span>
+      </header>
 
-      <form onSubmit={handleAddRecord} style={{ marginBottom: "1.5rem" }}>
-        <select
-          value={studentId}
-          onChange={(e) => setStudentId(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
-        >
+      <form className="entry-form" onSubmit={handleAddRecord}>
+        <select value={studentId} onChange={(e) => setStudentId(e.target.value)}>
           <option value="">-- Select student --</option>
           {students.map((s) => (
             <option key={s.id} value={s.id}>{s.fullName}</option>
           ))}
         </select>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
-        />
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
-        >
+        <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
           <option value="present">Present</option>
           <option value="absent">Absent</option>
           <option value="late">Late</option>
@@ -82,13 +76,21 @@ function Attendance() {
         <button type="submit">Record Attendance</button>
       </form>
 
-      <ul>
-        {records.map((r) => (
-          <li key={r.id}>
-            {getStudentName(r.studentId)} — {r.date}: {r.status}
-          </li>
-        ))}
-      </ul>
+      <div className="record-panel">
+        <ul className="record-list">
+          {records.map((r) => (
+            <li key={r.id} className="record-item">
+              <div>
+                <strong>{getStudentName(r.studentId)}</strong>
+                <span>{r.date}</span>
+              </div>
+              <span className={`status-tag ${r.status === "absent" ? "warning" : "active"}`}>
+                {r.status}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

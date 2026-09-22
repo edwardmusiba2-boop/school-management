@@ -1,16 +1,42 @@
 // src/components/Navbar.jsx
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+const navItems = [
+  { to: "/", label: "Dashboard" },
+  { to: "/students", label: "Students" },
+  { to: "/teachers", label: "Teachers" },
+  { to: "/classes", label: "Classes" },
+  { to: "/grades", label: "Grades" },
+  { to: "/attendance", label: "Attendance" },
+  { to: "/reports", label: "Reports" },
+];
 
 function Navbar() {
   return (
-    <nav style={{ display: "flex", gap: "1rem", padding: "1rem", borderBottom: "1px solid #ccc" }}>
-      <Link to="/">Dashboard</Link>
-      <Link to="/students">Students</Link>
-      <Link to="/teachers">Teachers</Link>
-      <Link to="/classes">Classes</Link>
-      <Link to="/grades">Grades</Link>
-      <Link to="/attendance">Attendance</Link>
-    </nav>
+    <header className="navbar">
+      <div className="navbar-inner">
+        <div className="brand-wrap">
+          <div className="brand-mark">S</div>
+          <div>
+            <div className="brand-name">SchoolFlow</div>
+            <small>Campus control</small>
+          </div>
+        </div>
+
+        <nav className="nav-links" aria-label="Main navigation">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 }
 

@@ -44,6 +44,7 @@ function Grades() {
       recordedAt: serverTimestamp(),
     });
 
+    setStudentId("");
     setSubject("");
     setScore("");
     setTerm("");
@@ -56,15 +57,17 @@ function Grades() {
   }
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h1>Grades</h1>
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <p className="section-tag">Results</p>
+          <h1>Grades</h1>
+        </div>
+        <span className="page-badge">Performance log</span>
+      </header>
 
-      <form onSubmit={handleAddGrade} style={{ marginBottom: "1.5rem" }}>
-        <select
-          value={studentId}
-          onChange={(e) => setStudentId(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
-        >
+      <form className="entry-form" onSubmit={handleAddGrade}>
+        <select value={studentId} onChange={(e) => setStudentId(e.target.value)}>
           <option value="">-- Select student --</option>
           {students.map((s) => (
             <option key={s.id} value={s.id}>{s.fullName}</option>
@@ -75,39 +78,42 @@ function Grades() {
           placeholder="Subject"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <input
           type="number"
           placeholder="Score"
           value={score}
           onChange={(e) => setScore(e.target.value)}
-          style={{ marginRight: "0.5rem", width: "80px" }}
+          style={{ maxWidth: "90px" }}
         />
         <input
           type="text"
-          placeholder="Term (e.g. Term 1 2026)"
+          placeholder="Term"
           value={term}
           onChange={(e) => setTerm(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <input
           type="text"
-          placeholder="Exam type (e.g. Midterm)"
+          placeholder="Exam type"
           value={examType}
           onChange={(e) => setExamType(e.target.value)}
-          style={{ marginRight: "0.5rem" }}
         />
         <button type="submit">Add Grade</button>
       </form>
 
-      <ul>
-        {grades.map((g) => (
-          <li key={g.id}>
-            {getStudentName(g.studentId)} — {g.subject}: {g.score} ({g.examType}, {g.term})
-          </li>
-        ))}
-      </ul>
+      <div className="record-panel">
+        <ul className="record-list">
+          {grades.map((g) => (
+            <li key={g.id} className="record-item">
+              <div>
+                <strong>{getStudentName(g.studentId)}</strong>
+                <span>{g.subject}: {g.score} ({g.examType}, {g.term})</span>
+              </div>
+              <span className="status-tag active">{g.score >= 70 ? "Strong" : "Needs support"}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
